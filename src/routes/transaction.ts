@@ -1,5 +1,8 @@
 import express from 'express'
 import * as transactionController from '../controllers/transaction'
+import transactionSchema from '../schema/transactionSchema'
+import validateSchema from '../middlewares/validateSchema'
+
 const router = express.Router()
 
 /** 
@@ -10,6 +13,6 @@ const router = express.Router()
 
 router.get('/transaction', transactionController.getAllTransaction)
 router.get('/transaction/:id', transactionController.getSingleTransaction)
-router.post('/transaction', transactionController.createTransaction)
+router.post('/transaction', validateSchema(transactionSchema), transactionController.createTransaction)
 
 export default router
