@@ -1,12 +1,20 @@
 import express, { Request, Response, NextFunction } from 'express'
 import Transaction from '../models/transaction';
 import mongoose from 'mongoose';
-import { rmSync } from 'fs';
 
+/**
+ * @description gets all the existing transaction
+ * 
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {NextFunction} next 
+ * 
+ * @route GET /api/transaction
+ */
 export const getAllTransaction = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const data = await Transaction.find()
-        res.json({ success: true, data })
+        res.status(200).json({ success: true, data })
     }
     catch (error) {
         console.log(error);
@@ -14,6 +22,15 @@ export const getAllTransaction = async (req: Request, res: Response, next: NextF
     }
 }
 
+/**
+ * @description gets single transaction
+ * 
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {NextFunction} next 
+ * 
+ * @route GET /api/transaction/:id
+ */
 export const getSingleTransaction = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id
@@ -30,12 +47,20 @@ export const getSingleTransaction = async (req: Request, res: Response, next: Ne
     }
 }
 
+/**
+ * @description gets all the existing blog
+ * 
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {NextFunction} next 
+ * 
+ * @route POST /api/transaction
+ */
 export const createTransaction = async (req: Request, res: Response, next: NextFunction) => {
     try {
 
         const data = await Transaction.create(req.body)
-        res.json({ success: true, data })
-
+        res.status(200).json({ success: true, data })
     }
     catch (error) {
         next(error)
