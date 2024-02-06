@@ -17,8 +17,7 @@ export const getAllTransaction = async (req: Request, res: Response, next: NextF
         res.status(200).json({ success: true, data })
     }
     catch (error) {
-        console.log(error);
-
+        next(error)
     }
 }
 
@@ -43,7 +42,7 @@ export const getSingleTransaction = async (req: Request, res: Response, next: Ne
         res.status(200).json({ success: true, data })
     }
     catch (error) {
-        res.json(error)
+        next(error)
     }
 }
 
